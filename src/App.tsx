@@ -3,6 +3,7 @@ import PasswordGate from "./components/PasswordGate";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Countdown from "./components/Countdown";
+import Together from "./components/Together";
 import LoveLetter from "./components/LoveLetter";
 import Gallery from "./components/Gallery";
 import Reasons from "./components/Reasons";
@@ -59,6 +60,7 @@ export default function App() {
           <main>
             <Hero />
             <Countdown />
+            <Together />
             <LoveLetter />
             <Gallery />
             <Reasons />
