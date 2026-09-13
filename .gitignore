@@ -24,3 +24,6 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Single-file build handed to the user (generated, not source)
+/birthday-site.html
