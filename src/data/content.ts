@@ -1,10 +1,13 @@
-import hero from "../assets/hero.jpg";
-import g1 from "../assets/gallery-1.jpg";
-import g2 from "../assets/gallery-2.jpg";
-import g3 from "../assets/gallery-3.jpg";
-import g4 from "../assets/gallery-4.jpg";
-import g5 from "../assets/gallery-5.jpg";
-import g6 from "../assets/gallery-6.jpg";
+import hero from "../assets/hero.webp";
+import g1 from "../assets/gallery-1.webp";
+import g2 from "../assets/gallery-2.webp";
+import g3 from "../assets/gallery-3.webp";
+import g4 from "../assets/gallery-4.webp";
+import g5 from "../assets/gallery-5.webp";
+import g6 from "../assets/gallery-6.webp";
+import g7 from "../assets/gallery-7.webp";
+import g8 from "../assets/gallery-8.webp";
+import g9 from "../assets/gallery-9.webp";
 
 /* ─────────────────────────────────────────────
    ✏️  عدّل من هنا
@@ -91,6 +94,24 @@ export const photos = [
     sub: "Our morning coffee... the sweetest habit",
     tall: false,
   },
+  {
+    src: g7,
+    caption: "بالونات على شكل قلب… زي قلبي بالظبط",
+    sub: "Heart balloons — just like my heart",
+    tall: true,
+  },
+  {
+    src: g8,
+    caption: "عشاء على ضو الشمع… وأحلى ضيافة انتي",
+    sub: "A candlelit dinner, sweeter because of you",
+    tall: true,
+  },
+  {
+    src: g9,
+    caption: "ولّعت لك قلب في السما 🔥",
+    sub: "I lit a heart for you in the sky",
+    tall: false,
+  },
 ];
 
 export const loveLetter = {
@@ -160,4 +181,21 @@ export const finalMessage = {
   big: "بحبك",
   line1: "بكل الحب اللي في قلبي، وبكل السنين اللي في عمري",
   line2: "كل سنة وانتي حبيبتي… وكل سنة وإحنا سوا",
+};
+
+/* ─────────────────────────────────────────────
+   💞  عدّاد "إحنا مع بعض"
+   ─────────────────────────────────────────────
+   حط تاريخ أول يوم ليكم هنا بالصيغة دي: "سنة-شهر-يوم"
+   مثال: "2025-02-14"  (يعني 14 فبراير 2025)
+
+   لو سيبتها null → القسم ده مش هيظهر خالص في الموقع.
+   ───────────────────────────────────────────── */
+export const togetherSince: string | null = null;
+
+export const togetherCopy = {
+  script: "Since the very first day",
+  title: "إحنا مع بعض من",
+  line: "وكل ثانية بتعدّي… بتزيد حبي ليكي ❤️",
+  units: { days: "يوم", hours: "ساعة", minutes: "دقيقة", seconds: "ثانية" },
 };

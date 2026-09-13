@@ -346,7 +346,13 @@ export function MusicProvider({ children, showWidget }: MusicProviderProps) {
             ? "متوقفة مؤقتاً"
             : "دوسي عشان تسمعي أغنيتنا";
 
-  const currentId = music.youtubeIds[Math.min(idIndexRef.current, music.youtubeIds.length - 1)];
+  /**
+   * Always works, even if every hard-coded video ID above goes stale:
+   * a plain YouTube search for the song title + artist.
+   */
+  const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    `${music.title} ${music.artist}`,
+  )}`;
 
   return (
     <MusicContext.Provider value={value}>
@@ -420,12 +426,12 @@ export function MusicProvider({ children, showWidget }: MusicProviderProps) {
               <div className="mt-3 rounded-2xl bg-rose-50 px-3 py-2.5 text-sm leading-relaxed text-rose-deep ring-1 ring-rose-100">
                 للأسف الأغنية مش متاحة للتشغيل هنا دلوقتي 😢{" "}
                 <a
-                  href={`https://www.youtube.com/watch?v=${currentId}`}
+                  href={searchUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="font-bold underline underline-offset-4"
                 >
-                  افتحيها على يوتيوب ↗
+                  دوّري عليها في يوتيوب ↗
                 </a>
               </div>
             )}

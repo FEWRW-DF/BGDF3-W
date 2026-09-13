@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { cn } from "../utils/cn";
+import { togetherSince } from "../data/content";
 
 const links = [
   { href: "#home", label: "البداية" },
   { href: "#countdown", label: "فاضل قد إيه؟" },
+  // لينك العدّاد بيظهر بس لو التاريخ متظبط في content.ts
+  ...(togetherSince ? [{ href: "#together", label: "إحنا مع بعض" }] : []),
   { href: "#letter", label: "رسالتي" },
   { href: "#gallery", label: "صورنا" },
   { href: "#reasons", label: "ليه بحبك" },

@@ -9,15 +9,30 @@ function getBirthdayInfo(now: Date) {
   const isToday = now.getMonth() === m && now.getDate() === d;
 
   let next = new Date(now.getFullYear(), m, d, 0, 0, 0, 0);
+  let passedThisYear = false;
+  let daysSince = 0;
+
   if (!isToday && now.getTime() > next.getTime()) {
+    // Her birthday already happened this year → count down to the next one,
+    // but remember how many days ago we celebrated so the copy stays sweet.
+    passedThisYear = true;
+    daysSince = Math.floor((now.getTime() - next.getTime()) / 86_400_000);
     next = new Date(now.getFullYear() + 1, m, d, 0, 0, 0, 0);
   }
+
+  const hasHadBirthdayThisYear = isToday || passedThisYear;
+  /** عمرها دلوقتي */
+  const age = now.getFullYear() - config.birthYear - (hasHadBirthdayThisYear ? 0 : 1);
 
   const turning = (isToday ? now.getFullYear() : next.getFullYear()) - config.birthYear;
   const diff = Math.max(0, next.getTime() - now.getTime());
 
   return {
     isToday,
+    passedThisYear,
+    daysSince,
+    /** عمرها الحالي دلوقتي */
+    age,
     turning,
     days: Math.floor(diff / 86_400_000),
     hours: Math.floor((diff / 3_600_000) % 24),
@@ -76,10 +91,12 @@ export default function Countdown() {
           ) : (
             <>
               <h2 className="mt-2 font-display text-4xl text-rose-deep sm:text-6xl">
-                العد التنازلي لعيد ميلادك
+                {info.passedThisYear ? "كل يوم معاكي عيد 💕" : "العد التنازلي لعيد ميلادك"}
               </h2>
               <p className="mx-auto mt-4 max-w-2xl font-amiri text-xl leading-relaxed text-plum/80 sm:text-2xl">
-                فاضل قد إيه على أحلى يوم في السنة؟
+                {info.passedThisYear
+                  ? `عيدك اللي فات كان من ${formatNumber(info.daysSince)} يوم… والعدّاد ده لأحلى يوم جاي في السنة`
+                  : "فاضل قد إيه على أحلى يوم في السنة؟"}
               </p>
             </>
           )}
@@ -108,11 +125,27 @@ export default function Countdown() {
             </div>
 
             <p className="mt-8 text-center font-amiri text-xl text-plum/80 sm:text-2xl">
-              وهتطفي{" "}
-              <span className="rounded-xl bg-rose-100 px-3 py-1 font-bold text-rose-deep">
-                {info.turning}
-              </span>{" "}
-              شمعة 🎂 وأنا بتمنالك كل الأمنيات اللي في الدنيا
+              {info.passedThisYear ? (
+                <>
+                  انتي دلوقتي عندك{" "}
+                  <span className="rounded-xl bg-rose-100 px-3 py-1 font-bold text-rose-deep">
+                    {formatNumber(info.age)}
+                  </span>{" "}
+                  سنة من الجمال، وفي عيدك الجاي هتكملي{" "}
+                  <span className="rounded-xl bg-rose-100 px-3 py-1 font-bold text-rose-deep">
+                    {info.turning}
+                  </span>{" "}
+                  شمعة 🎂
+                </>
+              ) : (
+                <>
+                  وهتطفي{" "}
+                  <span className="rounded-xl bg-rose-100 px-3 py-1 font-bold text-rose-deep">
+                    {info.turning}
+                  </span>{" "}
+                  شمعة 🎂 وأنا بتمنالك كل الأمنيات اللي في الدنيا
+                </>
+              )}
             </p>
           </Reveal>
         )}
